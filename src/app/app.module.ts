@@ -8,6 +8,8 @@ import { IconComponent } from './icon/icon.component';
 import { QuoteIconComponent } from './quote-icon/quote-icon.component';
 import { MakesComponent } from './makes/makes.component';
 import { ModelsComponent } from './models/models.component';
+import { HappyComponent } from './happy/happy.component';
+import { SadComponent } from './sad/sad.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ModelsComponent } from './models/models.component';
     IconComponent,
     QuoteIconComponent,
     MakesComponent,
-    ModelsComponent
+    ModelsComponent,
+    HappyComponent,
+    SadComponent
   ],
   imports: [
     BrowserModule,

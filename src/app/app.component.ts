@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+declare var window;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +19,7 @@ export class AppComponent {
   models = []
   makes = []
   totalCostEssentials = 0
+  totalGoals = 0
   remainingAmount = 0
   netAmount = 0
   costEssentials = [
@@ -25,18 +28,18 @@ export class AppComponent {
     { title: 'food', value: 0 },
     { title: 'transportation', value: 0 }
   ]
+  goals = []
   title = 'RUPHA.io'
   year: number = 0
   value: number = 0
   computedValue: number = 0
   btnState: 'disabled'
   showProceed: boolean = false
-
-  compute(...args) {
-    this.data.getCompute(this.year, this.value).subscribe(
-      items => this.computedValue = items
-    )
-  }
+  essentialsOk = false
+  variablesOk = false
+  savingsOk = false
+  buyForecast = 0
+  updateWithGoal = false
 
   selectMake = (...args) => {
     const [make] = args
@@ -68,19 +71,46 @@ export class AppComponent {
     console.log(this.costEssentials)
   }
 
-  computeRemaining = (title: string, value: number) => {
-    const totalCostEssentials = this.costEssentials.map(x => x.value).reduce((a, c) => Number(a) + Number(c))
-    this.remainingAmount = this.netAmount - totalCostEssentials
+  compute = (title: string, value: number) => {
+    this.totalCostEssentials = this.costEssentials.map(x => x.value).reduce((a, c) => Number(a) + Number(c))
+    this.remainingAmount = this.netAmount - this.totalCostEssentials - this.totalGoals
+    
+    let twentyPercent = ((this.netAmount/10)* 2)
+    let fiftyPercent = (this.netAmount/2)
+    let thirtyPercent = ((this.netAmount/10) * 3)
+    console.log(fiftyPercent, ' ', thirtyPercent,' ',twentyPercent)
+    if (this.totalCostEssentials <= fiftyPercent){
+      this.essentialsOk = true
+    }else{
+      this.essentialsOk = false
+    }
+
+    if ((this.remainingAmount - twentyPercent) >= thirtyPercent){
+      this.variablesOk = true
+    }else{
+      this.variablesOk = false
+    }
+
+    if ((this.remainingAmount - thirtyPercent) < twentyPercent){
+      this.savingsOk = false
+    }else{
+      this.savingsOk = true 
+    }
+
     this.showProceed = true
   }
 
-  proceed() {
-    
+  updateGoals = data => {
+    this.totalGoals = data
   }
 
-  selectYear(year) {
-    this.year = year
-    this.data.getMakes().subscribe(items => this.makes = items)
+  updateAllocate = data => {
+    this.buyForecast = this.totalGoals / data
+    this.updateWithGoal = true
+  }
+
+  refresh = () => {
+    window.reload()
   }
 
   ngOnInit() {
