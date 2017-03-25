@@ -12,7 +12,7 @@
   <div class="container">
     <h1 class="jumbotron-heading" class="hidden-xs-down">
       <app-icon></app-icon> {{title}}</h1>
-    <p class="lead text-muted hidden-xs-down">Responsive Unopnionated Personal Finance Advisor</p>
+    <p class="lead text-muted hidden-xs-down">Responsive Unopinionated Personal Finance Advisor</p>
     <div class="container">
       <div class="row">
         <div class="col col-12 col-lg-6">
@@ -30,8 +30,10 @@
             <hr/> My Goals
             <div class="row">
               <input type="text" class="form-control col col-lg-6" value="" placeholder="e.g. laptop" />
-              <input type="number" class="form-control col col-lg-6" #selection (change)="updateGoals(selection.value)" placeholder="price of laptop" />
-              <label class="col col-lg-6">allocate per month</label> <input type="number" class="form-control col col-lg-3" #allocator (change)="updateAllocate(allocator.value)" placeholder="1000" />
+              <input type="number" class="form-control col col-lg-6" #selection (change)="updateGoals(selection.value)" placeholder="price of laptop"
+              />
+              <label class="col col-lg-6">allocate per month</label> <input type="number" class="form-control col col-lg-3"
+                #allocator (change)="updateAllocate(allocator.value)" placeholder="1000" />
               <br/>
               <h3 *ngIf="showGoals && updateWithGoal">In {{buyForecast}} months, you can buy </h3>
             </div>
@@ -64,7 +66,7 @@
             {{ savingsOk ? 'Perfect, you got savings':'Budget so tight now'}}
           </h5>
 
-          
+
           <button class="btn btn-success btn-lg" *ngIf="showProceed && essentialsOk" (click)="showGoals = true"> Do you want to add Goals? </button>
         </div>
       </div>

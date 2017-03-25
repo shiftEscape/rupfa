@@ -23,10 +23,10 @@ export class AppComponent {
   remainingAmount = 0
   netAmount = 0
   costEssentials = [
-    { title: 'rent', value: 0 },
-    { title: 'utilities', value: 0 },
-    { title: 'food', value: 0 },
-    { title: 'transportation', value: 0 }
+    { title: 'Rent', value: 0 },
+    { title: 'Utilities', value: 0 },
+    { title: 'Food', value: 0 },
+    { title: 'Transportation', value: 0 }
   ]
   goals = []
   title = 'RUPHA.io'
