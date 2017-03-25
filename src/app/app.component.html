@@ -12,7 +12,7 @@
   <div class="container">
     <h1 class="jumbotron-heading" class="hidden-xs-down">
       <app-icon></app-icon> {{title}}</h1>
-    <p class="lead text-muted hidden-xs-down">Responsive Unopinionated Personal Finance Advisor: (Based on <strong>50/30/20</strong> rule)</p>
+    <p class="lead text-muted hidden-xs-down">Responsive Unopinionated Personal Finance Advisor: (Based on <strong><a target="_blank" href="https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922">50/30/20</a></strong> rule)</p>
     <!--<p class="text-muted hidden-xs-down">(Based on 50-30-20 rule)</p>-->
     <div class="container">
       <div class="row">
@@ -34,7 +34,7 @@
                 <input type="text" class="form-control col col-lg-6" value="" placeholder="e.g. laptop" />
                 <input type="number" min="0" class="form-control col col-lg-6" #selection (change)="updateGoals(selection.value)" placeholder="price of laptop"
                 />
-                <label class="col col-lg-6">allocate per month</label> <input type="number" class="form-control col col-lg-3"
+                <label class="col col-lg-6">Allocation per month:</label> <input type="number" class="form-control col col-lg-3"
                   #allocator (change)="updateAllocate(allocator.value)" placeholder="0" />
                 <br/>
                 <h3 *ngIf="showGoals && updateWithGoal">In {{buyForecast}} months, you can buy </h3>
@@ -47,7 +47,7 @@
         </div>
         <div class="col col-12 col-lg-6">
           <span class="text-muted">My remaining:</span>
-          <h2>{{remainingAmount}}</h2>
+          <h2>{{remainingAmount | number : '1.2-2'}}</h2>
 
           <hr>
 
@@ -56,7 +56,7 @@
             <app-happy *ngIf="essentialsOk" class="text-success"></app-happy>
             <app-sad *ngIf="!essentialsOk" class="text-danger"></app-sad>
             <h5 class="text-primary">
-              {{ (essentialsOk) ? ' Great! You\'re awesome at expense management' : 'Essential expenses is more than 50%, please review your
+              {{ (essentialsOk) ? '&nbsp;Great! You\'re awesome at expense management.' : '&nbsp;Essential expenses is more than 50%, please review your
               expenses.'}}
             </h5>
           </div>
@@ -66,7 +66,7 @@
             <app-happy *ngIf="variablesOk" class="text-success"></app-happy>
             <app-sad *ngIf="!variablesOk" class="text-danger"></app-sad>
             <h5 class="text-primary">
-              {{ variablesOk ? 'Fantastic, you have money to spare':'Be careful on how you spend, you might get out of budget'}}
+              {{ variablesOk ? '&nbsp;Fantastic! You have money to spare!':'&nbsp;Be careful on how you spend, you might get out of budget.'}}
             </h5>
           </div>
 
@@ -75,12 +75,12 @@
             <app-happy *ngIf="savingsOk" class="text-success"></app-happy>
             <app-sad *ngIf="!savingsOk" class="text-danger"></app-sad>
             <h5 class="text-primary">
-              {{ savingsOk ? 'Perfect, you got savings':'Budget so tight now'}}
+              {{ savingsOk ? '&nbsp;Perfect! You got savings!':'&nbsp;Budget so tight now.'}}
             </h5>
           </div>
 
 
-          <button class="btn btn-success btn-lg" *ngIf="showProceed && essentialsOk" (click)="showGoals = true"> Do you want to add Goals? </button>
+          <button class="btn btn-success btn-lg" *ngIf="showProceed && essentialsOk" (click)="showGoals = true"> Do you want to add goals? </button>
         </div>
       </div>
 
