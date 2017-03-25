@@ -29,7 +29,7 @@ export class AppComponent {
     { title: 'Transportation', value: 0 }
   ]
   goals = []
-  title = 'RUPHA.io'
+  title = 'RUPFA.io'
   year: number = 0
   value: number = 0
   computedValue: number = 0

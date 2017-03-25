@@ -15,6 +15,22 @@ html{
     margin-bottom: 0;
 }
 
+.advice-wrapper * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.advice-wrapper {
+    margin-bottom: 20px;
+}
+
+.advice-wrapper .heading {
+    background: #2e7d32;
+    color: #FFF;
+    padding: 0px 6px;
+    margin-bottom: 8px;
+}
+
 @media only screen and (min-width: 750px) {
     h1 {
         font-size:50px;

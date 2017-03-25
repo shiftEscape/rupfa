@@ -2,10 +2,10 @@
   <div class="container d-flex justify-content-between">
     <a href="#" class="navbar-brand">
       <app-icon></app-icon> {{title}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader"
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button>-->
   </div>
 </div>
 <section class="jumbotron">
@@ -13,58 +13,71 @@
     <h1 class="jumbotron-heading" class="hidden-xs-down">
       <app-icon></app-icon> {{title}}</h1>
     <p class="lead text-muted hidden-xs-down">Responsive Unopinionated Personal Finance Advisor</p>
+    <!--<p class="text-muted hidden-xs-down">(Based on 50-30-20 rule)</p>-->
     <div class="container">
       <div class="row">
         <div class="col col-12 col-lg-6">
-          <label>My monthly net income</label>
-          <input type="number" class="form-control btn-lg" #selection (keyup)="setNetAmount(selection.value)" />
-          <hr/>
-          <label for="">My Essential Expenses</label>
-          <span class="text-muted"> e.g (Rent, Food, Transpo, Utilities)</span>
-          <div *ngFor="let item of costEssentials" class="row">
-            <label for="" class="col col-lg-4">{{item.title}}</label>
-            <input type="number" class="form-control col col-lg-6" #selection (change)="updateComputation(item.title,selection.value)"
-              [value]="item.value" />
-          </div>
-          <div *ngIf="showGoals">
-            <hr/> My Goals
-            <div class="row">
-              <input type="text" class="form-control col col-lg-6" value="" placeholder="e.g. laptop" />
-              <input type="number" class="form-control col col-lg-6" #selection (change)="updateGoals(selection.value)" placeholder="price of laptop"
-              />
-              <label class="col col-lg-6">allocate per month</label> <input type="number" class="form-control col col-lg-3"
-                #allocator (change)="updateAllocate(allocator.value)" placeholder="1000" />
-              <br/>
-              <h3 *ngIf="showGoals && updateWithGoal">In {{buyForecast}} months, you can buy </h3>
+          <form (submit)="compute()">
+            <label>My monthly net income</label>
+            <input type="number" min="0" placeholder="0.00" class="form-control btn-lg" #selection (keyup)="setNetAmount(selection.value)" />
+            <hr/>
+            <label for="">My Essential Expenses</label>
+            <span class="text-muted"> e.g (Rent, Food, Transpo, Utilities)</span>
+            <div *ngFor="let item of costEssentials" class="row">
+              <label for="" class="col col-lg-4">{{item.title}}</label>
+              <input type="number" min="0" class="form-control col col-lg-6" #selection (change)="updateComputation(item.title,selection.value)"
+                [value]="item.value" />
             </div>
-          </div>
-          <hr/>
-          <button class="btn btn-primary btn-lg" (click)="compute()" [disabled]="(netAmount === 0) ? true : false"> Compute </button>
-          <button class="btn btn-default btn-lg" (click)="refresh()" *ngIf="(remainingAmount < 0) ? true : false"> Reset Computation </button>
-
+            <div *ngIf="showGoals">
+              <hr/> My Goals
+              <div class="row">
+                <input type="text" class="form-control col col-lg-6" value="" placeholder="e.g. laptop" />
+                <input type="number" min="0" class="form-control col col-lg-6" #selection (change)="updateGoals(selection.value)" placeholder="price of laptop"
+                />
+                <label class="col col-lg-6">allocate per month</label> <input type="number" class="form-control col col-lg-3"
+                  #allocator (change)="updateAllocate(allocator.value)" placeholder="1000" />
+                <br/>
+                <h3 *ngIf="showGoals && updateWithGoal">In {{buyForecast}} months, you can buy </h3>
+              </div>
+            </div>
+            <hr/>
+            <button type="submit" class="btn btn-primary btn-lg" (click)="compute()" [disabled]="(netAmount === 0) ? true : false"> Compute </button>
+            <button class="btn btn-default btn-lg" (click)="refresh()" *ngIf="(remainingAmount < 0) ? true : false"> Reset Computation </button>
+          </form>
         </div>
         <div class="col col-12 col-lg-6">
           <span class="text-muted">My remaining:</span>
           <h2>{{remainingAmount}}</h2>
 
-          <h5 *ngIf="showProceed" class="text-primary">
+          <hr>
+
+          <div class="advice-wrapper" *ngIf="showProceed">
+            <span class="heading">On Essential Expenses:</span><br>
             <app-happy *ngIf="essentialsOk" class="text-success"></app-happy>
             <app-sad *ngIf="!essentialsOk" class="text-danger"></app-sad>
-            {{ (essentialsOk) ? ' Great, youre awesome at expense management' : 'Essential expenses is more than 50%, please review your
-            expenses.'}}
-          </h5>
+            <h5 class="text-primary">
+              {{ (essentialsOk) ? ' Great! You\'re awesome at expense management' : 'Essential expenses is more than 50%, please review your
+              expenses.'}}
+            </h5>
+          </div>
 
-          <h5 *ngIf="showProceed" class="text-primary">
+          <div class="advice-wrapper" *ngIf="showProceed">
+            <span class="heading">On Variable Budget:</span><br>
             <app-happy *ngIf="variablesOk" class="text-success"></app-happy>
             <app-sad *ngIf="!variablesOk" class="text-danger"></app-sad>
-            {{ variablesOk ? 'Fantastic, you have money to spare':'Be careful on how you spend, you might get out of budget'}}
-          </h5>
+            <h5 class="text-primary">
+              {{ variablesOk ? 'Fantastic, you have money to spare':'Be careful on how you spend, you might get out of budget'}}
+            </h5>
+          </div>
 
-          <h5 *ngIf="showProceed" class="text-primary">
+          <div class="advice-wrapper" *ngIf="showProceed">
+            <span class="heading">On Savings:</span><br>
             <app-happy *ngIf="savingsOk" class="text-success"></app-happy>
             <app-sad *ngIf="!savingsOk" class="text-danger"></app-sad>
-            {{ savingsOk ? 'Perfect, you got savings':'Budget so tight now'}}
-          </h5>
+            <h5 class="text-primary">
+              {{ savingsOk ? 'Perfect, you got savings':'Budget so tight now'}}
+            </h5>
+          </div>
 
 
           <button class="btn btn-success btn-lg" *ngIf="showProceed && essentialsOk" (click)="showGoals = true"> Do you want to add Goals? </button>
