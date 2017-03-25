@@ -73,8 +73,11 @@ export class AppComponent {
 
   compute = (title: string, value: number) => {
     this.totalCostEssentials = this.costEssentials.map(x => x.value).reduce((a, c) => Number(a) + Number(c))
-    this.remainingAmount = this.netAmount - this.totalCostEssentials - this.totalGoals
-    
+    let tempRemaining = this.netAmount - this.totalCostEssentials - this.totalGoals;
+
+    if(tempRemaining < 0) return false;
+    this.remainingAmount = tempRemaining;
+
     let twentyPercent = ((this.netAmount/10)* 2)
     let fiftyPercent = (this.netAmount/2)
     let thirtyPercent = ((this.netAmount/10) * 3)
