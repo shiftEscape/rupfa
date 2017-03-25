@@ -1,0 +1,4 @@
+<select name="" id="" class="form-control" #selection (change)="selectModel(selection.value)">
+  <option></option>
+  <option [value]="model.value" *ngFor="let model of models">{{model.car_model}}</option>
+</select>

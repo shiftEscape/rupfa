@@ -1,3 +1,38 @@
-<h1>
-  {{title}}
-</h1>
+<div class="navbar navbar-inverse bg-inverse">
+  <div class="container d-flex justify-content-between">
+    <a href="#" class="navbar-brand"><app-icon></app-icon> {{title}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</div>
+<section class="jumbotron">
+  <div class="container">
+    <h1 class="jumbotron-heading" class="hidden-xs-down"> <app-icon></app-icon> {{title}}</h1>
+    <p class="lead text-muted hidden-xs-down">Responsive Unopnionated Personal Finance Advisor</p>    
+    <div class="container">
+      <div class="row"> 
+        <div class="col col-12 col-lg-6">
+          <label>My monthly net income</label>
+          <input type="number" class="form-control btn-lg" #selection (keyup)="setNetAmount(selection.value)" />
+          <hr/> 
+          <label for="">My Essential Cost</label> 
+          <div *ngFor="let item of costEssentials" class="row">
+              <label for="" class="col col-lg-4">{{item.title}}</label>
+              <input type="number" class="form-control col col-lg-6" #selection (change)="updateComputation(item.title,selection.value)" [value]="item.value"/>
+          </div>
+          <button class="btn btn-primary btn-lg" (click)="computeRemaining()" [disabled]="(netAmount === 0) ? true : false"> Compute </button>
+        </div>        
+        <div class="col col-12 col-lg-6">
+          <span class="text-muted">My remaining:</span>
+          <h2>{{remainingAmount}}</h2>
+          <button class="btn btn-success btn-lg" *ngIf="showProceed"> Next </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+<div class="container">
+  
+</div>

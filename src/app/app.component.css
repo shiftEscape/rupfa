@@ -1,0 +1,23 @@
+h1 {
+        font-size: 10vw;
+    }
+html{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eab92d+0,c79810+100;Yellow+3D+%232 */
+background: #eab92d; /* Old browsers */
+background: -moz-linear-gradient(top,  #eab92d 0%, #c79810 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #eab92d 0%,#c79810 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #eab92d 0%,#c79810 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eab92d', endColorstr='#c79810',GradientType=0 ); /* IE6-9 */
+
+}
+@media only screen and (min-width: 750px) {
+    h1 {
+        font-size:50px;
+    }
+}
+
+@media only screen and (min-width: 1190px) {
+    h1 {
+        font-size:80px;
+    }
+}
