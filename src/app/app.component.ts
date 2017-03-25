@@ -38,7 +38,7 @@ export class AppComponent {
   essentialsOk = false
   variablesOk = false
   savingsOk = false
-  buyForecast = 0
+  buyForecast:any = 0
   updateWithGoal = false
 
   selectMake = (...args) => {
@@ -105,7 +105,8 @@ export class AppComponent {
   }
 
   updateAllocate = data => {
-    this.buyForecast = this.totalGoals / data
+    this.buyForecast = this.totalGoals / data;
+    this.buyForecast = (this.buyForecast).toString().substr(0,2)
     this.updateWithGoal = true
   }
 

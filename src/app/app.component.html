@@ -35,7 +35,7 @@
                 <input type="number" min="0" class="form-control col col-lg-6" #selection (change)="updateGoals(selection.value)" placeholder="price of laptop"
                 />
                 <label class="col col-lg-6">allocate per month</label> <input type="number" class="form-control col col-lg-3"
-                  #allocator (change)="updateAllocate(allocator.value)" placeholder="1000" />
+                  #allocator (change)="updateAllocate(allocator.value)" placeholder="0" />
                 <br/>
                 <h3 *ngIf="showGoals && updateWithGoal">In {{buyForecast}} months, you can buy </h3>
               </div>
