@@ -19,7 +19,7 @@ import { SadComponent } from './sad/sad.component';
     MakesComponent,
     ModelsComponent,
     HappyComponent,
-    SadComponent
+    SadComponent,
   ],
   imports: [
     BrowserModule,
