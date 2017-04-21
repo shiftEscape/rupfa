@@ -16,30 +16,31 @@ declare var window;
 export class AppComponent {
   constructor(private data: DataService) { }
 
-  models = []
-  makes = []
-  totalCostEssentials = 0
-  totalGoals = 0
-  remainingAmount = 0
-  netAmount = 0
-  costEssentials = [
+  models: object = []
+  makes: object = []
+  totalCostEssentials: number = 0
+  totalGoals: number = 0
+  remainingAmount: number = 0
+  netAmount: number = 0
+  costEssentials: object = [
     { title: 'Rent', value: 0 },
     { title: 'Utilities', value: 0 },
     { title: 'Food', value: 0 },
     { title: 'Transportation', value: 0 }
   ]
-  goals = []
+  goals: object = []
   title = 'RUPFA.io'
   year: number = 0
   value: number = 0
   computedValue: number = 0
   btnState: 'disabled'
   showProceed: boolean = false
-  essentialsOk = false
-  variablesOk = false
-  savingsOk = false
+  essentialsOk: boolean = false
+  variablesOk: boolean = false
+  savingsOk: boolean = false
   buyForecast:any = 0
-  updateWithGoal = false
+  updateWithGoal: boolean = false
+  here: string = window.location.toString()
 
   selectMake = (...args) => {
     const [make] = args

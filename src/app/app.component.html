@@ -21,7 +21,7 @@
             <label>My monthly net income</label>
             <input type="number" min="0" placeholder="0.00" class="form-control btn-lg" #selection (keyup)="setNetAmount(selection.value)" />
             <hr/>
-            <label for="">My Essential Expenses</label>
+            <label for="">My Essential Expenses {{here}}</label>
             <span class="text-muted"> e.g (Rent, Food, Transpo, Utilities)</span>
             <div *ngFor="let item of costEssentials" class="row">
               <label for="" class="col col-lg-4">{{item.title}}</label>
